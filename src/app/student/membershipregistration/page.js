@@ -1,10 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Header from '@/app/component/header/page';
+import Footer from '@/app/component/footer/page';
+import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 export default function MembershipRegistrationForm() {
+  const router = useRouter();
   const [form, setForm] = useState({ name: '', email: '', year: '', department: '' });
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // Departments with only 1st and 2nd year
   const twoYearDepartments = ['Software Engineering', 'Water Resource Engineering', 'Mechanical Engineering'];
@@ -60,109 +67,140 @@ export default function MembershipRegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setLoading(true);
 
     try {
       const res = await fetch('/api/register-member', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(form),
-        headers: { 'Content-Type': 'application/json' },
       });
 
       const data = await res.json();
+      
       if (data.success) {
-        setMessage('Successfully registered!');
+        setMessage('Successfully registered! Your membership request is pending approval.');
         setForm({ name: '', email: '', year: '', department: '' });
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          router.push('/student');
+        }, 3000);
       } else {
-        setMessage(`Error: ${data.error}`);
+        setMessage(data.error || 'Registration failed. Please try again.');
       }
     } catch (err) {
-      setMessage('An error occurred. Please try again.');
+      setMessage('An error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container my-5 px-4 py-5 rounded-4 shadow-lg bg-light" style={{ maxWidth: '800px' }}>
-      <h2 className="text-center mb-4 text-primary fw-bold">CST ACM Chapter Membership Registration</h2>
+    <>
+      <Header />
+      <div className="min-vh-100 bg-light">
+        <div className="container my-5 px-4 py-5 rounded-4 shadow-lg bg-light" style={{ maxWidth: '800px' }}>
+          <h2 className="text-center mb-4 text-primary fw-bold">CST ACM Chapter Membership Registration</h2>
 
-      {message && (
-        <div className="alert alert-info text-center fw-semibold rounded-pill">
-          {message}
-        </div>
-      )}
+          {message && (
+            <div className={`alert ${message.includes('Successfully') ? 'alert-success' : 'alert-danger'} text-center fw-semibold rounded-pill`}>
+              {message}
+            </div>
+          )}
 
-      <form onSubmit={handleSubmit} className="row g-4">
-        <div className="col-md-6">
-          <label htmlFor="name" className="form-label fw-semibold">Full Name</label>
-          <input
-            type="text"
-            className="form-control shadow-sm rounded-3"
-            id="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
+          <form onSubmit={handleSubmit} className="row g-4">
+            <div className="col-md-6">
+              <label htmlFor="name" className="form-label fw-semibold">Full Name</label>
+              <input
+                type="text"
+                className="form-control shadow-sm rounded-3"
+                id="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="email" className="form-label fw-semibold">College Email</label>
+              <input
+                type="email"
+                className="form-control shadow-sm rounded-3"
+                id="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="department" className="form-label fw-semibold">Department</label>
+              <select
+                className="form-select shadow-sm rounded-3"
+                id="department"
+                value={form.department}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Department</option>
+                <option>Information Technology</option>
+                <option>Software Engineering</option>
+                <option>Electronics and Communication Engineering</option>
+                <option>Instrument and Control Engineering</option>
+                <option>Water Resource Engineering</option>
+                <option>Civil Engineering</option>
+                <option>Architecture</option>
+                <option>Mechanical Engineering</option>
+                <option>Engineering Geology</option>
+                <option>Electrical Engineering</option>
+              </select>
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="year" className="form-label fw-semibold">Year</label>
+              <select
+                className="form-select shadow-sm rounded-3"
+                id="year"
+                value={form.year}
+                onChange={handleChange}
+                required
+                disabled={!form.department}
+              >
+                <option value="">Select your year</option>
+                {getYearOptions().map((yearOption) => (
+                  <option key={yearOption} value={yearOption}>
+                    {yearOption}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-12">
+              <button 
+                type="submit" 
+                className="btn btn-success w-100 py-2 fs-5 rounded-pill shadow"
+                disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Become a Member'}
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div className="col-md-6">
-          <label htmlFor="email" className="form-label fw-semibold">College Email</label>
-          <input
-            type="email"
-            className="form-control shadow-sm rounded-3"
-            id="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
+        {/* Add back button at the bottom */}
+        <div className="container py-4">
+          <div className="text-center">
+            <Link href="/">
+              <Button variant="primary" className="px-4">
+                Back to Home
+              </Button>
+            </Link>
+          </div>
         </div>
-
-        <div className="col-md-6">
-          <label htmlFor="department" className="form-label fw-semibold">Department</label>
-          <select
-            className="form-select shadow-sm rounded-3"
-            id="department"
-            value={form.department}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Department</option>
-            <option>Information Technology</option>
-            <option>Software Engineering</option>
-            <option>Electronics and Communication Engineering</option>
-            <option>Instrument and Control Engineering</option>
-            <option>Water Resource Engineering</option>
-            <option>Civil Engineering</option>
-            <option>Architecture</option>
-            <option>Mechanical Engineering</option>
-            <option>Engineering Geology</option>
-            <option>Electrical Engineering</option>
-          </select>
-        </div>
-
-        <div className="col-md-6">
-          <label htmlFor="year" className="form-label fw-semibold">Year</label>
-          <select
-            className="form-select shadow-sm rounded-3"
-            id="year"
-            value={form.year}
-            onChange={handleChange}
-            required
-            disabled={!form.department}
-          >
-            <option value="">Select your year</option>
-            {getYearOptions().map((yearOption) => (
-              <option key={yearOption} value={yearOption}>
-                {yearOption}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="col-12">
-          <button type="submit" className="btn btn-success w-100 py-2 fs-5 rounded-pill shadow">
-            Become a Member
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }

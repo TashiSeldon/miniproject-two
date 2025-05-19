@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import clientPromise from '@/lib/mongodb';
 
 export async function POST(req) {
-  const body = await req.json();
-  const { name, email, year, department } = body;
-
   try {
-    const newMember = await prisma.member.create({
-      data: { name, email, year, department },
-    });
-    return NextResponse.json({ success: true, member: newMember });
-  } catch (error) {
-    // Check for Prisma unique constraint violation
-    if (
-      error.code === 'P2002' &&
-      error.meta &&
-      error.meta.target.includes('email')
-    ) {
+    const body = await req.json();
+    const { name, email, year, department } = body;
+
+    if (!name || !email || !year || !department) {
+      return NextResponse.json(
+        { success: false, error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection('memberships');
+
+    // Check if email already exists
+    const existingMember = await collection.findOne({ email });
+    if (existingMember) {
       return NextResponse.json(
         {
           success: false,
@@ -28,7 +29,27 @@ export async function POST(req) {
       );
     }
 
-    // Handle other errors
+    const newMember = {
+      name,
+      email,
+      year,
+      department,
+      status: 'pending',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const result = await collection.insertOne(newMember);
+    
+    return NextResponse.json({ 
+      success: true, 
+      member: {
+        ...newMember,
+        _id: result.insertedId
+      }
+    });
+  } catch (error) {
+    console.error('Error registering member:', error);
     return NextResponse.json(
       {
         success: false,

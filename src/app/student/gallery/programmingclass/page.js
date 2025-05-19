@@ -1,18 +1,25 @@
 "use client";
 
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useAuth } from '../../../../context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function ProgrammingClassGallery() {
+const ProgrammingClassPage = () => {
+  // Initialize Bootstrap
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
+
   return (
     <div className="bg-light min-vh-100">
       {/* Header Banner */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
-          padding: '3rem 0',
-          marginBottom: '2rem',
-        }}
-      >
+      <div style={{
+        background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+        padding: '3rem 0',
+        marginBottom: '2rem'
+      }}>
         <div className="container">
           <h1 className="text-white text-center mb-0">Programming Class</h1>
         </div>
@@ -82,4 +89,6 @@ export default function ProgrammingClassGallery() {
       </div>
     </div>
   );
-}
+};
+
+export default ProgrammingClassPage;

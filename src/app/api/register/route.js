@@ -1,44 +1,49 @@
 //src/app/api/register/route.js 
 
-import prisma from '@/lib/prisma';
+import { NextResponse } from 'next/server';
+import clientPromise from '@/lib/mongodb';
 import bcrypt from 'bcrypt';
 
-
 export async function POST(req) {
-  console.log("Register API called");
-  const { name, email, password } = await req.json();
-  console.log({ name, email, password });
-
-  if (!name || !email || !password) {
-    return new Response(JSON.stringify({ error: 'All fields are required' }), { status: 400 });
-  }
-
-  const existingUser = await prisma.user.findUnique({ where: { email } });
-  console.log("Existing user found:", existingUser);
-
-  if (existingUser) {
-    return new Response(JSON.stringify({ error: 'User already exists' }), { status: 400 });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("Password hashed");
-
   try {
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
-    });
-    console.log("User created:", user);
+    const { name, email, password } = await req.json();
+    if (!name || !email || !password) {
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
 
-    return new Response(
-      JSON.stringify({ message: 'User registered successfully', user }),
-      { status: 201 }
-    );
+    const client = await clientPromise;
+    const db = client.db();
+    const users = db.collection('users');
+
+    // Check if user already exists
+    const existingUser = await users.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json({ error: 'User already exists' }, { status: 400 });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const newUser = {
+      name,
+      email,
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    const result = await users.insertOne(newUser);
+
+    return NextResponse.json({
+      message: 'User registered successfully',
+      user: {
+        ...newUser,
+        _id: result.insertedId,
+        password: undefined // Do not return password
+      }
+    }, { status: 201 });
   } catch (error) {
-    console.error("Prisma error:", error);
-    return new Response(JSON.stringify({ error: 'Something went wrong' }), { status: 500 });
+    console.error('Registration error:', error);
+    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }

@@ -1,65 +1,71 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import clientPromise from '@/lib/mongodb';
 
 export async function POST(req) {
   try {
-    const body = await req.json();
+    const data = await req.json();
+    console.log('Received registration data:', data);
 
-    // Check if it's a team registration
-    if (body.members && Array.isArray(body.members)) {
-      const { eventId, teamName, members } = body;
+    const { eventId, registrationType, name, collegeEmail, department, year, teamName, teamMembers } = data;
 
-      const team = await prisma.team.create({
-        data: {
-          teamName,
-          event: { connect: { id: eventId } },
-          members: {
-            create: members.map((member) => ({
-              name: member.name,
-              email: member.email,
-              studentNumber: member.studentNumber,
-              department: member.department,
-              year: member.year,
-              comment: member.comment || '',
-            })),
-          },
-        },
-      });
-
-      return NextResponse.json({ success: true, team });
+    if (!eventId || !registrationType) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Individual registration
-    const {
-      name,
-      email,
-      studentNumber,
-      department,
-      year,
-      comment,
-      eventId,
-    } = body;
+    const client = await clientPromise;
+    const db = client.db();
 
-    const registration = await prisma.individualRegistration.create({
-      data: {
+    if (registrationType === 'individual') {
+      // Individual registration
+      if (!name || !collegeEmail || !department || !year) {
+        return NextResponse.json({ error: 'Missing required fields for individual registration' }, { status: 400 });
+      }
+
+      const collection = db.collection('eventIndividualRegistrations');
+      const registration = {
+        eventId,
         name,
-        email,
-        studentNumber,
+        collegeEmail,
         department,
         year,
-        comment,
-        event: { connect: { id: eventId } },
-      },
-    });
+        status: 'pending',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
 
-    return NextResponse.json({ success: true, registration });
+      const result = await collection.insertOne(registration);
+      console.log('Individual registration created:', result);
+
+      return NextResponse.json({
+        ...registration,
+        _id: result.insertedId
+      }, { status: 200 });
+    } else {
+      // Team registration
+      if (!teamName || !teamMembers || teamMembers.length === 0) {
+        return NextResponse.json({ error: 'Missing required fields for team registration' }, { status: 400 });
+      }
+
+      const collection = db.collection('eventTeamRegistrations');
+      const registration = {
+        eventId,
+        teamName,
+        teamMembers,
+        status: 'pending',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      const result = await collection.insertOne(registration);
+      console.log('Team registration created:', result);
+
+      return NextResponse.json({
+        ...registration,
+        _id: result.insertedId
+      }, { status: 200 });
+    }
   } catch (error) {
-    console.error('Registration error:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to register' },
-      { status: 500 }
-    );
+    console.error('API Error:', error);
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }

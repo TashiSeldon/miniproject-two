@@ -1,8 +1,17 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useAuth } from '../../../../context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function SeminarGallery() {
+const SeminarPage = () => {
+  // Initialize Bootstrap
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
+
   return (
     <div className="bg-light">
       {/* Header Banner */}
@@ -98,4 +107,6 @@ export default function SeminarGallery() {
       </div>
     </div>
   );
-}
+};
+
+export default SeminarPage;

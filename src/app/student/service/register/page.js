@@ -4,22 +4,22 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const departmentYears = {
+  'Software Engineering': ['1st', '2nd'],
+  'Water Resource Engineering': ['1st', '2nd'],
+  'Mechanical Engineering': ['1st', '2nd'],
+  'Architecture': ['1st', '2nd', '3rd', '4th', '5th'],
+  'Information Technology': ['1st', '2nd', '3rd', '4th'],
+  'Electronics and Communication Engineering': ['1st', '2nd', '3rd', '4th'],
+  'Instrument and Control Engineering': ['1st', '2nd', '3rd', '4th'],
+  'Civil Engineering': ['1st', '2nd', '3rd', '4th'],
+  'Engineering Geology': ['1st', '2nd', '3rd', '4th'],
+  'Electrical Engineering': ['1st', '2nd', '3rd', '4th'],
+};
+
 export default function Register() {
   const [formData, setFormData] = useState({ name: '', department: '', year: '', service: '' });
   const [showModal, setShowModal] = useState(false);
-
-  const departmentYears = {
-    'Information Technology': ['1st', '2nd', '3rd', '4th'],
-    'Software Engineering': ['1st', '2nd', '3rd', '4th'],
-    'Electronics and Communication Engineering': ['1st', '2nd', '3rd', '4th'],
-    'Instrument and Control Engineering': ['1st', '2nd', '3rd', '4th'],
-    'Water Resource Engineering': ['1st', '2nd'],
-    'Civil Engineering': ['1st', '2nd', '3rd', '4th'],
-    'Architecture': ['1st', '2nd', '3rd', '4th', '5th'],
-    'Mechanical Engineering': ['1st', '2nd'],
-    'Engineering Geology': ['1st', '2nd', '3rd', '4th'],
-    'Electrical Engineering': ['1st', '2nd', '3rd', '4th'],
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,9 +75,7 @@ export default function Register() {
               className="form-select"
               required
               value={formData.department}
-              onChange={(e) =>
-                setFormData({ ...formData, department: e.target.value, year: '' })
-              }
+              onChange={(e) => setFormData({ ...formData, department: e.target.value, year: '' })}
             >
               <option value="">-- Select Department --</option>
               {Object.keys(departmentYears).map((dept) => (

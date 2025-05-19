@@ -1,9 +1,7 @@
 // src/app/api/serviceregister/route.js
 
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
+import clientPromise from '@/lib/mongodb';
 
 export async function POST(req) {
   try {
@@ -16,11 +14,27 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    const saved = await prisma.serviceRegistration.create({
-      data: { name, department, year, service },
-    });
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection('serviceRegistrations');
 
-    return NextResponse.json(saved, { status: 200 });
+    const serviceRegistration = {
+      name,
+      department,
+      year,
+      service,
+      status: 'pending',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const result = await collection.insertOne(serviceRegistration);
+    console.log('Service registration created:', result);
+
+    return NextResponse.json({
+      ...serviceRegistration,
+      _id: result.insertedId
+    }, { status: 200 });
   } catch (error) {
     console.error('API Error:', error);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

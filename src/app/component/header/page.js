@@ -46,24 +46,21 @@ const Header = () => {
         
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link as={Link} href="/">Home</Nav.Link>
+            <Nav.Link as={Link} href="/student">Home</Nav.Link>
             <Nav.Link as={Link} href="/student/article">Article</Nav.Link>
             <Nav.Link as={Link} href="/student/event">Event</Nav.Link>
-            <Nav.Link as={Link} href="/student/services">Services</Nav.Link>
-            <Nav.Link as={Link} href="/student/office-barrier">Office Barrier</Nav.Link>
+            <Nav.Link as={Link} href="/student/service">Services</Nav.Link>
+            <Nav.Link as={Link} href="/student/officebarrier">Office Barrier</Nav.Link>
             <Nav.Link as={Link} href="/student/membershipregistration">Membership Registration</Nav.Link>
           </Nav>
           
           <Nav>
             {user ? (
               <>
-               
-                
+                <Nav.Link as={Link} href="/">Logout</Nav.Link>
                 {user.role === 'admin' && (
                   <Nav.Link as={Link} href="/admin/dashboard">Admin Dashboard</Nav.Link>
                 )}
-                
-                
               </>
             ) : (
               <>
