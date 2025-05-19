@@ -118,95 +118,93 @@ export default function MembershipRegistration() {
   };
 
   return (
-    <div className="min-vh-100 bg-light">
-      <div className="container py-5">
-        <form onSubmit={handleSubmit} className="row g-4">
-          <div className="col-md-6">
-            <label htmlFor="fullName" className="form-label fw-semibold">Full Name</label>
-            <input
-              type="text"
-              className="form-control shadow-sm rounded-3"
-              id="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-          </div>
+    <div className="container py-5">
+      <form onSubmit={handleSubmit} className="row g-4">
+        <div className="col-md-6">
+          <label htmlFor="fullName" className="form-label fw-semibold">Full Name</label>
+          <input
+            type="text"
+            className="form-control shadow-sm rounded-3"
+            id="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-          <div className="col-md-6">
-            <label htmlFor="email" className="form-label fw-semibold">College Email</label>
-            <input
-              type="email"
-              className="form-control shadow-sm rounded-3"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="email" className="form-label fw-semibold">College Email</label>
+          <input
+            type="email"
+            className="form-control shadow-sm rounded-3"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-          <div className="col-md-6">
-            <label htmlFor="department" className="form-label fw-semibold">Department</label>
-            <select
-              className="form-select shadow-sm rounded-3"
-              id="department"
-              value={formData.department}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Department</option>
-              <option>Information Technology</option>
-              <option>Software Engineering</option>
-              <option>Electronics and Communication Engineering</option>
-              <option>Instrument and Control Engineering</option>
-              <option>Water Resource Engineering</option>
-              <option>Civil Engineering</option>
-              <option>Architecture</option>
-              <option>Mechanical Engineering</option>
-              <option>Engineering Geology</option>
-              <option>Electrical Engineering</option>
-            </select>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="department" className="form-label fw-semibold">Department</label>
+          <select
+            className="form-select shadow-sm rounded-3"
+            id="department"
+            value={formData.department}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Department</option>
+            <option>Information Technology</option>
+            <option>Software Engineering</option>
+            <option>Electronics and Communication Engineering</option>
+            <option>Instrument and Control Engineering</option>
+            <option>Water Resource Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Architecture</option>
+            <option>Mechanical Engineering</option>
+            <option>Engineering Geology</option>
+            <option>Electrical Engineering</option>
+          </select>
+        </div>
 
-          <div className="col-md-6">
-            <label htmlFor="year" className="form-label fw-semibold">Year</label>
-            <select
-              className="form-select shadow-sm rounded-3"
-              id="year"
-              value={formData.year}
-              onChange={handleChange}
-              required
-              disabled={!formData.department}
-            >
-              <option value="">Select your year</option>
-              {getYearOptions().map((yearOption) => (
-                <option key={yearOption} value={yearOption}>
-                  {yearOption}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="col-md-6">
+          <label htmlFor="year" className="form-label fw-semibold">Year</label>
+          <select
+            className="form-select shadow-sm rounded-3"
+            id="year"
+            value={formData.year}
+            onChange={handleChange}
+            required
+            disabled={!formData.department}
+          >
+            <option value="">Select your year</option>
+            {getYearOptions().map((yearOption) => (
+              <option key={yearOption} value={yearOption}>
+                {yearOption}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div className="col-12">
-            <button 
-              type="submit" 
-              className="btn btn-success w-100 py-2 fs-5 rounded-pill shadow"
-              disabled={loading}
-            >
-              {loading ? 'Registering...' : 'Become a Member'}
-            </button>
-          </div>
-        </form>
+        <div className="col-12">
+          <button 
+            type="submit" 
+            className="btn btn-success w-100 py-2 fs-5 rounded-pill shadow"
+            disabled={loading}
+          >
+            {loading ? 'Registering...' : 'Become a Member'}
+          </button>
+        </div>
+      </form>
 
-        {/* Add back button at the bottom */}
-        <div className="container py-4">
-          <div className="text-center">
-            <Link href="/">
-              <Button variant="primary" className="px-4">
-                Back to Home
-              </Button>
-            </Link>
-          </div>
+      {/* Add back button at the bottom */}
+      <div className="container py-4">
+        <div className="text-center">
+          <Link href="/">
+            <Button variant="primary" className="px-4">
+              Back to Home
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

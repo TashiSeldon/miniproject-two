@@ -181,247 +181,232 @@ export default function EventPage() {
   if (error) return <div className="text-center text-danger p-5">Error: {error}</div>;
 
   return (
-    <div className="min-vh-100 bg-light">
-      <div style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', color: '#212529' }}>
-        <section className="container">
-          {/* Admin Controls */}
-          {user?.role === 'admin' && (
-            <div className="mb-4">
-              <button
-                onClick={() => setShowAddForm(true)}
-                className="btn btn-primary mb-3"
-              >
-                Add New Event
-              </button>
+    <div className="container py-4">
+      {/* Admin Controls */}
+      {user?.role === 'admin' && (
+        <div className="mb-4">
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="btn btn-primary mb-3"
+          >
+            Add New Event
+          </button>
 
-              {/* Add Event Form Modal */}
-              <Modal show={showAddForm} onHide={() => setShowAddForm(false)} size="lg">
-                <Modal.Header closeButton>
-                  <Modal.Title>Add New Event</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Form onSubmit={handleAddEvent}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Title</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={newEvent.title}
-                        onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
-                        required
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        value={newEvent.date}
-                        onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
-                        required
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Time</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={newEvent.time}
-                        onChange={(e) => setNewEvent({...newEvent, time: e.target.value})}
-                        placeholder="e.g., 9:00 AM - 5:00 PM"
-                        required
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Venue</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={newEvent.venue}
-                        onChange={(e) => setNewEvent({...newEvent, venue: e.target.value})}
-                        required
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Description</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        value={newEvent.description}
-                        onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
-                        required
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Vision</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={2}
-                        value={newEvent.vision}
-                        onChange={(e) => setNewEvent({...newEvent, vision: e.target.value})}
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Mission</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={2}
-                        value={newEvent.mission}
-                        onChange={(e) => setNewEvent({...newEvent, mission: e.target.value})}
-                      />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                      <Form.Label>Marking Criteria</Form.Label>
-                      {newEvent.markingCriteria.map((criteria, index) => (
-                        <div key={`criteria-${index}`} className="mb-2">
-                          <Form.Control
-                            type="text"
-                            value={criteria}
-                            onChange={(e) => {
-                              const newCriteria = [...newEvent.markingCriteria];
-                              newCriteria[index] = e.target.value;
-                              setNewEvent({...newEvent, markingCriteria: newCriteria});
-                            }}
-                            placeholder={`Criteria ${index + 1}`}
-                          />
-                        </div>
-                      ))}
-                      <Button
-                        variant="outline-secondary"
-                        size="sm"
-                        onClick={() => setNewEvent({
-                          ...newEvent,
-                          markingCriteria: [...newEvent.markingCriteria, '']
-                        })}
-                      >
-                        Add Criteria
-                      </Button>
-                    </Form.Group>
-
-                    <div className="text-end">
-                      <Button variant="secondary" onClick={() => setShowAddForm(false)} className="me-2">
-                        Cancel
-                      </Button>
-                      <Button variant="primary" type="submit">
-                        Add Event
-                      </Button>
-                    </div>
-                  </Form>
-                </Modal.Body>
-              </Modal>
-            </div>
-          )}
-
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
-
-          <div className="row g-4">
-            {events.map((event) => (
-              <div key={event.id} className="col-md-6 col-lg-4">
-                <div 
-                  className="card h-100 shadow-sm hover-shadow transition"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => setOpenEventId(event.id)}
-                >
-                  <div className="card-body">
-                    <h5 className="card-title fw-bold text-primary">{event.title}</h5>
-                    <div className="d-flex align-items-center mb-2">
-                      <span className="text-muted">Date: {new Date(event.date).toLocaleDateString()}</span>
-                    </div>
-                    <div className="d-flex align-items-center mb-2">
-                      <span className="text-muted">Time: {event.time}</span>
-                    </div>
-                    <div className="d-flex align-items-center mb-3">
-                      <span className="text-muted">Venue: {event.venue}</span>
-                    </div>
-                    <p className="card-text text-muted">{event.description}</p>
-                  </div>
-                  <div className="card-footer bg-transparent border-top-0">
-                    {user?.role === 'admin' && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteEvent(event.id);
-                        }}
-                        className="btn btn-danger w-100 mb-2"
-                      >
-                        Delete Event
-                      </button>
-                    )}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(`/student/event/registerpage`);
-                      }}
-                      className="btn btn-primary w-100 py-2"
-                    >
-                      Register Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Event Details Modal */}
-          <Modal show={!!openEventId} onHide={() => setOpenEventId(null)}>
+          {/* Add Event Form Modal */}
+          <Modal show={showAddForm} onHide={() => setShowAddForm(false)} size="lg">
             <Modal.Header closeButton>
-              <Modal.Title>{openEvent?.title}</Modal.Title>
+              <Modal.Title>Add New Event</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <div className="mb-3">
-                <p><strong>Date:</strong> {openEvent && new Date(openEvent.date).toLocaleDateString()}</p>
-                <p><strong>Time:</strong> {openEvent?.time}</p>
-                <p><strong>Venue:</strong> {openEvent?.venue}</p>
-                <p><strong>Description:</strong> {openEvent?.description}</p>
-                <p><strong>Vision:</strong> {openEvent?.vision}</p>
-                <p><strong>Mission:</strong> {openEvent?.mission}</p>
-                {openEvent?.markingCriteria && openEvent.markingCriteria.length > 0 && (
-                  <div>
-                    <strong>Marking Criteria:</strong>
-                    <ul className="mt-2">
-                      {openEvent.markingCriteria.map((item, index) => (
-                        <li key={`criteria-item-${index}`}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setOpenEventId(null)}>
-                Close
-              </Button>
-              <Button 
-                variant="primary" 
-                onClick={() => {
-                  setOpenEventId(null);
-                  router.push('/student/event/registerpage');
-                }}
-              >
-                Register Now
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </section>
+              <Form onSubmit={handleAddEvent}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={newEvent.title}
+                    onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+                    required
+                  />
+                </Form.Group>
 
-        {/* Add back button at the bottom */}
-        <div className="container py-4">
-          <div className="text-center">
-            <Link href="/">
-              <Button variant="primary" className="px-4">
-                Back to Home
-              </Button>
-            </Link>
-          </div>
+                <Form.Group className="mb-3">
+                  <Form.Label>Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={newEvent.date}
+                    onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Time</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={newEvent.time}
+                    onChange={(e) => setNewEvent({...newEvent, time: e.target.value})}
+                    placeholder="e.g., 9:00 AM - 5:00 PM"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Venue</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={newEvent.venue}
+                    onChange={(e) => setNewEvent({...newEvent, venue: e.target.value})}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={newEvent.description}
+                    onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Vision</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={2}
+                    value={newEvent.vision}
+                    onChange={(e) => setNewEvent({...newEvent, vision: e.target.value})}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Mission</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={2}
+                    value={newEvent.mission}
+                    onChange={(e) => setNewEvent({...newEvent, mission: e.target.value})}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Marking Criteria</Form.Label>
+                  {newEvent.markingCriteria.map((criteria, index) => (
+                    <div key={`criteria-${index}`} className="mb-2">
+                      <Form.Control
+                        type="text"
+                        value={criteria}
+                        onChange={(e) => {
+                          const newCriteria = [...newEvent.markingCriteria];
+                          newCriteria[index] = e.target.value;
+                          setNewEvent({...newEvent, markingCriteria: newCriteria});
+                        }}
+                        placeholder={`Criteria ${index + 1}`}
+                      />
+                    </div>
+                  ))}
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    onClick={() => setNewEvent({
+                      ...newEvent,
+                      markingCriteria: [...newEvent.markingCriteria, '']
+                    })}
+                  >
+                    Add Criteria
+                  </Button>
+                </Form.Group>
+
+                <div className="text-end">
+                  <Button variant="secondary" onClick={() => setShowAddForm(false)} className="me-2">
+                    Cancel
+                  </Button>
+                  <Button variant="primary" type="submit">
+                    Add Event
+                  </Button>
+                </div>
+              </Form>
+            </Modal.Body>
+          </Modal>
         </div>
+      )}
+
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
+
+      <div className="row g-4">
+        {events.map((event) => (
+          <div key={event.id} className="col-md-6 col-lg-4">
+            <div 
+              className="card h-100 shadow-sm hover-shadow transition"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setOpenEventId(event.id)}
+            >
+              <div className="card-body">
+                <h5 className="card-title fw-bold text-primary">{event.title}</h5>
+                <div className="d-flex align-items-center mb-2">
+                  <span className="text-muted">Date: {new Date(event.date).toLocaleDateString()}</span>
+                </div>
+                <div className="d-flex align-items-center mb-2">
+                  <span className="text-muted">Time: {event.time}</span>
+                </div>
+                <div className="d-flex align-items-center mb-3">
+                  <span className="text-muted">Venue: {event.venue}</span>
+                </div>
+                <p className="card-text text-muted">{event.description}</p>
+              </div>
+              <div className="card-footer bg-transparent border-top-0">
+                {user?.role === 'admin' && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteEvent(event.id);
+                    }}
+                    className="btn btn-danger w-100 mb-2"
+                  >
+                    Delete Event
+                  </button>
+                )}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/student/event/registerpage`);
+                  }}
+                  className="btn btn-primary w-100 py-2"
+                >
+                  Register Now
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Event Details Modal */}
+      <Modal show={!!openEventId} onHide={() => setOpenEventId(null)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{openEvent?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="mb-3">
+            <p><strong>Date:</strong> {openEvent && new Date(openEvent.date).toLocaleDateString()}</p>
+            <p><strong>Time:</strong> {openEvent?.time}</p>
+            <p><strong>Venue:</strong> {openEvent?.venue}</p>
+            <p><strong>Description:</strong> {openEvent?.description}</p>
+            <p><strong>Vision:</strong> {openEvent?.vision}</p>
+            <p><strong>Mission:</strong> {openEvent?.mission}</p>
+            {openEvent?.markingCriteria && openEvent.markingCriteria.length > 0 && (
+              <div>
+                <strong>Marking Criteria:</strong>
+                <ul className="mt-2">
+                  {openEvent.markingCriteria.map((item, index) => (
+                    <li key={`criteria-item-${index}`}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setOpenEventId(null)}>
+            Close
+          </Button>
+          <Button 
+            variant="primary" 
+            onClick={() => {
+              setOpenEventId(null);
+              router.push('/student/event/registerpage');
+            }}
+          >
+            Register Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
