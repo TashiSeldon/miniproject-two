@@ -16,14 +16,14 @@ export async function POST(req) {
     const db = client.db();
 
     if (registrationType === 'individual') {
-      // Individual registration
+    // Individual registration
       if (!name || !collegeEmail || !department || !year) {
         return NextResponse.json({ error: 'Missing required fields for individual registration' }, { status: 400 });
       }
 
       const collection = db.collection('eventIndividualRegistrations');
       const registration = {
-        eventId,
+      eventId,
         name,
         collegeEmail,
         department,

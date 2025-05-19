@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/app/component/header/page';
 import Footer from '@/app/component/footer/page';
 import { Button } from 'react-bootstrap';
+import Image from 'next/image';
 
 export default function ArticlePage() {
   const [news, setNews] = useState([]);
@@ -86,13 +87,15 @@ export default function ArticlePage() {
                     </div>
                     {item.imageUrl && (
                       <div className="col-md-4 mb-3 mb-md-0">
-                        <img
+                        <Image
                           src={item.imageUrl}
                           alt={item.imageAlt || item.title}
+                          width={300}
+                          height={200}
                           className="img-fluid rounded"
                           style={{ 
                             width: '100%', 
-                            height: '250px', 
+                            height: 'auto',
                             objectFit: 'cover',
                             boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                           }}
@@ -123,19 +126,21 @@ export default function ArticlePage() {
                     fontFamily: 'Georgia, serif',
                     lineHeight: '1.6'
                   }}>
-                    The war in Ukraine was deadlier in its third year than the first two years combined due to the use of weaponized drones. According to Roman Kostenko, chair of the defense and intelligence committee in Ukraine's Parliament, around 70% of Russian and Ukrainian casualties can be attributed to drones.
+                    The war in Ukraine was deadlier in its third year than the first two years combined due to the use of weaponized drones. According to Roman Kostenko, chair of the defense and intelligence committee in Ukraine&apos;s Parliament, around 70% of Russian and Ukrainian casualties can be attributed to drones.
                   </p>
                   <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#333' }}>
-                    Both Ukrainian and Russian officials estimate that 3 million to 4 million drones will be made in each country this year. Ukrainian Colonel Vadym Sukharevsky said the country has adopted a "robots first" military strategy.
+                    Both Ukrainian and Russian officials estimate that 3 million to 4 million drones will be made in each country this year. Ukrainian Colonel Vadym Sukharevsky said the country has adopted a &ldquo;robots first&rdquo; military strategy.
                   </p>
                   <p className="text-muted mt-3" style={{ fontSize: '0.9rem', fontStyle: 'italic' }}>
                     Source: The New York Times; Marc Santora; Lara Jakes; Andrew E. Kramer (March 3, 2025)
                   </p>
                 </div>
                 <div className="col-md-4">
-                  <img
+                  <Image
                     src="https://imgur.com/6AUTVdn.jpg"
                     alt="Drones in Ukraine"
+                    width={300}
+                    height={200}
                     className="img-fluid rounded"
                     style={{ width: '100%', height: 'auto' }}
                   />
@@ -192,16 +197,18 @@ export default function ArticlePage() {
                     Quantum computers leverage the properties of quantum mechanics to process information exponentially faster than classical computers for specific tasks.
                   </p>
                   <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#333' }}>
-                    This year, we're seeing quantum computing being applied in areas such as cryptography, where it can potentially crack currently considered secure codes, and in drug discovery, speeding up the process by accurately simulating molecular structures. The technology is still nascent but poised to revolutionize industries by solving complex problems intractable for traditional computers.
+                    This year, we&apos;re seeing quantum computing being applied in areas such as cryptography, where it can potentially crack currently considered secure codes, and in drug discovery, speeding up the process by accurately simulating molecular structures. The technology is still nascent but poised to revolutionize industries by solving complex problems intractable for traditional computers.
                   </p>
                   <p className="text-muted mt-3" style={{ fontSize: '0.9rem', fontStyle: 'italic' }}>
                     Source: Nikita Duggal – Last updated on Mar 21, 2025
                   </p>
                 </div>
                 <div className="col-md-4">
-                  <img
+                  <Image
                     src="https://imgur.com/OCPhpZn.jpg"
                     alt="Quantum Computing"
+                    width={300}
+                    height={200}
                     className="img-fluid rounded"
                     style={{ width: '100%', height: 'auto' }}
                   />
@@ -238,9 +245,11 @@ export default function ArticlePage() {
                   </p>
                 </div>
                 <div className="col-md-4">
-                  <img
+                  <Image
                     src="https://imgur.com/muLiw0v.jpg"
                     alt="Quantum Computing Breakthrough"
+                    width={300}
+                    height={200}
                     className="img-fluid rounded"
                     style={{ width: '100%', height: 'auto' }}
                   />

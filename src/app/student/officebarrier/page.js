@@ -5,6 +5,7 @@ import Header from '@/app/component/header/page';
 import Footer from '@/app/component/footer/page';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function OfficeBarrier() {
   useEffect(() => {
@@ -34,10 +35,13 @@ export default function OfficeBarrier() {
           <div className="card shadow-sm mb-5 p-4">
             <div className="row align-items-center">
               <div className="col-md-4 text-center mb-3 mb-md-0">
-                <img
+                <Image
                   src="https://imgur.com/CggMQjV.jpg"
-                  className="img-fluid rounded shadow-sm"
                   alt="Program Coordinator"
+                  width={300}
+                  height={300}
+                  className="img-fluid rounded shadow-sm"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="col-md-8">
@@ -59,10 +63,13 @@ export default function OfficeBarrier() {
           <div className="card shadow-sm mb-5 p-4">
             <div className="row align-items-center">
               <div className="col-md-4 text-center mb-3 mb-md-0">
-                <img
+                <Image
                   src="https://imgur.com/xH95uMR.jpg"
-                  className="img-fluid rounded shadow-sm"
                   alt="Thukten Singye"
+                  width={300}
+                  height={300}
+                  className="img-fluid rounded shadow-sm"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="col-md-8">
@@ -82,10 +89,13 @@ export default function OfficeBarrier() {
           <div className="card shadow-sm mb-5 p-4">
             <div className="row align-items-center">
               <div className="col-md-4 text-center mb-3 mb-md-0">
-                <img
+                <Image
                   src="https://imgur.com/iN7LBKb.jpg"
-                  className="img-fluid rounded shadow-sm"
                   alt="Tshering Yangdon"
+                  width={300}
+                  height={300}
+                  className="img-fluid rounded shadow-sm"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="col-md-8">
@@ -105,10 +115,13 @@ export default function OfficeBarrier() {
           <div className="card shadow-sm mb-5 p-4">
             <div className="row align-items-center">
               <div className="col-md-4 text-center mb-3 mb-md-0">
-                <img
+                <Image
                   src="https://imgur.com/GdVDxDC.jpg"
-                  className="img-fluid rounded shadow-sm"
                   alt="Tashi Wangchuk"
+                  width={300}
+                  height={300}
+                  className="img-fluid rounded shadow-sm"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="col-md-8">

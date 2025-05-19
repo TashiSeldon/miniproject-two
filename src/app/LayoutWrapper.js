@@ -13,9 +13,9 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <>
-      {!hideNavFooter}
+      {!hideNavFooter && <Header />}
       <main style={{ flex: 1 }}>{children}</main>
-      {!hideNavFooter}
+      {!hideNavFooter && <Footer />}
     </>
   );
 }

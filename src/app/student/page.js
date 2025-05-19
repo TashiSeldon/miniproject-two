@@ -7,6 +7,7 @@ import '../globals.css';
 import { useAuth } from '../../context/AuthContext';
 import Header from '../component/header/page';
 import Footer from '../component/footer/page';
+import Image from 'next/image';
 
 export default function StudentHomePage() {
   const { user, loading } = useAuth();
@@ -43,10 +44,12 @@ export default function StudentHomePage() {
             <i className="fas fa-image fa-2x text-muted"></i>
           </div>
         ) : (
-          <img
+          <Image
             {...props}
             src={src || '/placeholder.jpg'}
             alt={alt}
+            width={600}
+            height={400}
             onLoad={() => setIsLoading(false)}
             onError={() => {
               setIsLoading(false);

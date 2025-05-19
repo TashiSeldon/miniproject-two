@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 const AdminDashboard = () => {
@@ -48,8 +48,8 @@ const AdminDashboard = () => {
   const [editEvent, setEditEvent] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  // Add eventsData constant
-  const eventsData = [
+  // Wrap eventsData in useMemo
+  const eventsData = React.useMemo(() => [
     {
       id: "eventOne",
       title: "Tech Talk: Future of AI",
@@ -78,10 +78,10 @@ const AdminDashboard = () => {
       time: "11:00 AM",
       venue: "CST Conference Hall"
     }
-  ];
+  ], []);
 
-  // Fetch registrations data
-  const fetchRegistrations = async () => {
+  // Wrap fetch functions in useCallback
+  const fetchRegistrations = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/registrations');
       if (!response.ok) throw new Error('Failed to fetch registrations');
@@ -105,10 +105,9 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  // Update fetchEvents to use eventsData
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       // Create a mapping of event IDs to event details
       const mapping = {};
@@ -120,9 +119,9 @@ const AdminDashboard = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, [eventsData]);
 
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/news');
       if (!response.ok) throw new Error('Failed to fetch news');
@@ -131,9 +130,9 @@ const AdminDashboard = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, []);
 
-  const fetchStudentContent = async () => {
+  const fetchStudentContent = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/student-content');
       if (!response.ok) throw new Error('Failed to fetch student content');
@@ -142,14 +141,14 @@ const AdminDashboard = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchRegistrations();
     fetchEvents();
     fetchNews();
     fetchStudentContent();
-  }, []);
+  }, [fetchRegistrations, fetchEvents, fetchNews, fetchStudentContent]);
 
   // Handle service request status update
   const handleServiceStatus = async (id, status) => {
@@ -583,8 +582,8 @@ const AdminDashboard = () => {
                 </tbody>
               </table>
             </div>
-          </div>
-        )}
+        </div>
+      )}
 
         {activeTab === 'memberships' && (
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -626,7 +625,7 @@ const AdminDashboard = () => {
                             >
                               Approve
                             </button>
-                            <button
+      <button
                               onClick={() => handleMembershipStatus(member._id, 'rejected')}
                               className="text-red-600 hover:text-red-900"
                             >
@@ -813,8 +812,8 @@ const AdminDashboard = () => {
               </div>
               <button type="submit" className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 Add News
-              </button>
-            </form>
+      </button>
+    </form>
 
             {/* News List */}
             <div className="overflow-x-auto">

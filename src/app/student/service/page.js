@@ -7,6 +7,7 @@ import Header from '@/app/component/header/page';
 import Footer from '@/app/component/footer/page';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Service() {
   const router = useRouter();
@@ -57,9 +58,11 @@ export default function Service() {
               {/* Image */}
               <div className="mt-5 text-center">
                 <h4 className="fw-bold mb-3">Services Offered</h4>
-                <img
+                <Image
                   src="https://imgur.com/LBwRSWF.jpg"
                   alt="Services Offered"
+                  width={800}
+                  height={600}
                   className="img-fluid rounded shadow"
                 />
               </div>
