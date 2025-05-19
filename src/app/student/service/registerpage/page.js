@@ -12,7 +12,7 @@ const departmentYears = {
   'Instrument and Control Engineering': ['1st', '2nd', '3rd', '4th'],
   'Civil Engineering': ['1st', '2nd', '3rd', '4th'],
   'Engineering Geology': ['1st', '2nd', '3rd', '4th'],
-  'Electrical Engineering': ['1st', '2nd', '3rd', '4th'],
+  'Electrical Engineering': ['1st', '2nd', '3rd', '4th']
 };
 
 export default function ServiceRegisterPage() {
