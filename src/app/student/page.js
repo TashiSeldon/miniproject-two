@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 import { useAuth } from '../../context/AuthContext';
-import Header from '../component/header/page';
-import Footer from '../component/footer/page';
 import Image from 'next/image';
 
 export default function StudentHomePage() {
@@ -127,9 +125,7 @@ export default function StudentHomePage() {
   }
 
   return (
-
     <div className="bg-light">
-      <Header />
       <div className="container py-4">
         <h2 className="mb-4 fw-bold">Welcome to the CST ACM Student Portal</h2>
 
@@ -154,7 +150,6 @@ export default function StudentHomePage() {
       <h1 className="text-center mb-4">Exclusively curated in-person and virtual events</h1>
 
       <EventGrid />
-      <Footer/>
     </div>
   );
 }

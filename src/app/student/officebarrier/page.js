@@ -12,19 +12,6 @@ export default function OfficeBarrier() {
 
   return (
     <div className="bg-light min-vh-100">
-      {/* Header */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
-          padding: '3rem 0',
-          marginBottom: '2rem',
-        }}
-      >
-        <div className="container">
-          <h1 className="text-white text-center mb-0">ACM Office Bearers</h1>
-        </div>
-      </div>
-
       <section className="container py-4">
         {/* Program Coordinator */}
         <h3 className="text-success mb-4">Program Coordinator</h3>

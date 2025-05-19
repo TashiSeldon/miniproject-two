@@ -183,21 +183,6 @@ export default function EventPage() {
   return (
     <div className="min-vh-100 bg-light">
       <div style={{ backgroundColor: '#f4f6f8', minHeight: '100vh', color: '#212529' }}>
-        {/* Header */}
-        <header className="py-5 mb-4" style={{
-          backgroundColor: '#0d3b66',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-        }}>
-          <div className="container text-center">
-            <h1 className="fw-bold display-5 text-white">
-              ACM Student Chapter Events
-            </h1>
-            <p className="lead text-white-50">
-              Explore and register for upcoming tech-driven events
-            </p>
-          </div>
-        </header>
-
         <section className="container">
           {/* Admin Controls */}
           {user?.role === 'admin' && (

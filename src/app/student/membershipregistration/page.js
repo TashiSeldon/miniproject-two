@@ -120,14 +120,6 @@ export default function MembershipRegistration() {
   return (
     <div className="min-vh-100 bg-light">
       <div className="container py-5">
-        <h1 className="text-center mb-4">ACM Membership Registration</h1>
-
-        {message && (
-          <div className={`alert ${message.includes('Successfully') ? 'alert-success' : 'alert-danger'} text-center fw-semibold rounded-pill`}>
-            {message}
-          </div>
-        )}
-
         <form onSubmit={handleSubmit} className="row g-4">
           <div className="col-md-6">
             <label htmlFor="fullName" className="form-label fw-semibold">Full Name</label>
