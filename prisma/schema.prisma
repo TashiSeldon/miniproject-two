@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Member {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  year       String
+  department String
+  createdAt  DateTime @default(now())
+}
+
+model EventIndividualRegistration {
+  id            Int      @id @default(autoincrement())
+  event         String
+  name          String
+  studentNumber String
+  department    String
+  year          String
+  createdAt     DateTime @default(now())
+}
+
+model EventTeamRegistration {
+  id                       Int               @id @default(autoincrement())
+  event                    String
+  groupLeader              String
+  groupLeaderStudentNumber String
+  department               String
+  year                     String
+  createdAt                DateTime          @default(now())
+  members                  EventTeamMember[]
+}
+
+model EventTeamMember {
+  id            Int                   @id @default(autoincrement())
+  teamId        Int
+  teamName      String
+  name          String
+  studentNumber String
+  department    String
+  year          String
+  team          EventTeamRegistration @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model ServiceRegistration {
+  id          String   @id @default(cuid())
+  name        String
+  department  String
+  year        String
+  service     String
+  createdAt   DateTime @default(now())
+}
