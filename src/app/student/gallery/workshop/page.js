@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../../../context/AuthContext';
 import Link from 'next/link';
 import Image from 'next/image';
-import Header from '@/app/component/header/page';
-import Footer from '@/app/component/footer/page';
 import { Button } from 'react-bootstrap';
 
 export default function WorkshopGallery() {
@@ -18,7 +16,6 @@ export default function WorkshopGallery() {
 
   return (
     <>
-      <Header />
       <div className="min-vh-100 bg-light">
         {/* Header */}
         <div
@@ -124,7 +121,6 @@ export default function WorkshopGallery() {
           </div>
         </div>
       </div>
-      <Footer />
 
       {/* Image Modal */}
       {selectedImage && (
