@@ -1,68 +1,99 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProgrammingClassGallery() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="bg-light">
       {/* Header Banner */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
-          padding: '3rem 0',
-          marginBottom: '2rem',
-        }}
-      >
+      <div style={{
+        background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+        padding: '3rem 0',
+        marginBottom: '2rem'
+      }}>
         <div className="container">
-          <h1 className="text-white text-center mb-0">Programming Class</h1>
+          <h1 className="text-white text-center mb-0">Programming Class Gallery</h1>
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="container py-4">
-        {/* Programming Class Content */}
-        <div className="news-content">
-          <h2>Introduction to Programming for First-Year Students</h2>
-          <p>
-            On 19/08/2024, the RUB ACM Student Chapter commenced programming sessions for first-year students. The session introduced the fundamentals of programming and provided a basic introduction to the Python programming language. It was designed to assist new members in acquiring programming skills and gaining valuable learning experience as they begin their journey in the field of technology.
-          </p>
-          <div className="row">
-            <div className="col-md-6">
-              <img src="https://i.imgur.com/ycJyaUp.jpg" className="img-fluid rounded shadow" alt="Programming Class 1" />
+        <div className="card border-0 rounded-4 overflow-hidden shadow-lg mb-4">
+          <div className="card-body p-4">
+            <h2 className="card-title mb-4" style={{ color: '#1e3c72' }}>
+              Programming Class Session
+            </h2>
+            <div className="card-text text-muted mb-4">
+              <p>
+                The RUB ACM Student Chapter organized a programming class session for its members. The session focused on fundamental programming concepts and problem-solving techniques, providing students with hands-on experience in coding.
+              </p>
+              <div className="row">
+                <div className="col-md-6">
+                  <Image 
+                    src="https://i.imgur.com/ycJyaUp.jpg" 
+                    className="img-fluid rounded shadow" 
+                    alt="Programming Class 1"
+                    width={600}
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Image 
+                    src="https://i.imgur.com/z9er7wO.jpg" 
+                    className="img-fluid rounded shadow" 
+                    alt="Programming Class 2"
+                    width={600}
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="col-md-6">
-              <img src="https://i.imgur.com/z9er7wO.jpg" className="img-fluid rounded shadow" alt="Programming Class 2" />
-            </div>
-          </div>
-        </div>
 
-        <hr className="my-4" />
+            <hr className="my-4" />
 
-        <div className="content mt-4">
-          <p>
-            The usual weekly programming class for a semester has commenced since last Monday i.e. on 6th March, 2023 with introduction of Object Oriented Programming languages.
-          </p>
-          <p>
-            The programming class will be mentored by a group of final year IT students whereby on Monday, first years will be learning JAVA language and on Tuesday, second years will be learning Python language along with its implementation in AI field.
-          </p>
-          <div className="row gallery mt-3">
-            <div className="col-md-6">
-              <img src="https://i.imgur.com/w2Rqhd4.jpg" className="img-fluid rounded shadow" alt="Hackathon Poster" />
-            </div>
-            <div className="col-md-6">
-              <img src="https://i.imgur.com/SKzfPTQ.jpg" className="img-fluid rounded shadow" alt="Hackathon Banner" />
+            <div className="content mt-4">
+              <h2 className="fw-bold mb-4" style={{ color: '#1e3c72' }}>Class Materials</h2>
+              <p className="text-muted" style={{ lineHeight: '1.8' }}>
+                The programming class included comprehensive materials covering various programming topics, from basic syntax to advanced algorithms. Students were provided with practical examples and exercises to enhance their understanding.
+              </p>
+              <div className="row">
+                <div className="col-md-6">
+                  <Image 
+                    src="https://i.imgur.com/w2Rqhd4.jpg" 
+                    className="img-fluid rounded shadow" 
+                    alt="Hackathon Poster"
+                    width={600}
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Image 
+                    src="https://i.imgur.com/SKzfPTQ.jpg" 
+                    className="img-fluid rounded shadow" 
+                    alt="Hackathon Banner"
+                    width={600}
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Back Button */}
         <div className="text-center mt-5">
-          <Link
+          <Link 
             href="/student"
             className="btn btn-outline-primary rounded-pill px-4 py-2"
             style={{
               borderColor: '#1e3c72',
               color: '#1e3c72',
-              transition: 'all 0.3s ease',
+              transition: 'all 0.3s ease'
             }}
             onMouseOver={(e) => {
               e.currentTarget.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
