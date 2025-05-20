@@ -64,7 +64,7 @@ export default function TechTalkGallery() {
                     }}
                     onClick={() => setSelectedImage({
                       title: 'Tech Talk Session',
-                      image: 'https://imgur.com/qZa9k5Q.jpg',
+                      image: 'https://i.imgur.com/qZa9k5Q.jpg',
                       description: 'Tech Talk Session on Competitive Programming'
                     })}
                     onMouseOver={(e) => {
@@ -77,7 +77,7 @@ export default function TechTalkGallery() {
                     }}
                   >
                     <Image
-                      src="https://imgur.com/qZa9k5Q.jpg"
+                      src="https://i.imgur.com/qZa9k5Q.jpg"
                       className="img-fluid"
                       alt="Tech Talk Session"
                       width={600}
@@ -95,7 +95,7 @@ export default function TechTalkGallery() {
                     }}
                     onClick={() => setSelectedImage({
                       title: 'Guidance on Kattis',
-                      image: 'https://imgur.com/shM1qqt.jpg',
+                      image: 'https://i.imgur.com/shM1qqt.jpg',
                       description: 'Session on Kattis platform usage'
                     })}
                     onMouseOver={(e) => {
@@ -108,7 +108,7 @@ export default function TechTalkGallery() {
                     }}
                   >
                     <Image
-                      src="https://imgur.com/shM1qqt.jpg"
+                      src="https://i.imgur.com/shM1qqt.jpg"
                       className="img-fluid"
                       alt="Guidance on Kattis"
                       width={600}
@@ -158,7 +158,7 @@ export default function TechTalkGallery() {
                     }}
                     onClick={() => setSelectedImage({
                       title: 'Tech Talk Contest',
-                      image: 'https://imgur.com/pVe2IO3.jpg',
+                      image: 'https://i.imgur.com/pVe2IO3.jpg',
                       date: '9/10/2022'
                     })}
                     onMouseOver={(e) => {
@@ -171,7 +171,7 @@ export default function TechTalkGallery() {
                     }}
                   >
                     <Image
-                      src="https://imgur.com/pVe2IO3.jpg"
+                      src="https://i.imgur.com/pVe2IO3.jpg"
                       className="img-fluid"
                       alt="Tech Talk Contest 1"
                       width={600}
@@ -189,7 +189,7 @@ export default function TechTalkGallery() {
                     }}
                     onClick={() => setSelectedImage({
                       title: 'Tech Talk Contest',
-                      image: 'https://imgur.com/xtUOmGa.jpg',
+                      image: 'https://i.imgur.com/xtUOmGa.jpg',
                       date: '9/10/2022'
                     })}
                     onMouseOver={(e) => {
@@ -202,7 +202,7 @@ export default function TechTalkGallery() {
                     }}
                   >
                     <Image
-                      src="https://imgur.com/xtUOmGa.jpg"
+                      src="https://i.imgur.com/xtUOmGa.jpg"
                       className="img-fluid"
                       alt="Tech Talk Contest 2"
                       width={600}
