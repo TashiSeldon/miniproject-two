@@ -1,7 +1,7 @@
 // src/app/layout.js 
 import './globals.css';
 import { AuthProvider } from '../context/AuthContext';
-import LayoutWrapper from './LayoutWrapper';
+import HeaderFooterLayout from './HeaderFooterLayout';
 
 
 export default function RootLayout({ children }) {
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <AuthProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <HeaderFooterLayout>{children}</HeaderFooterLayout>
         </AuthProvider>
       </body>
     </html>
