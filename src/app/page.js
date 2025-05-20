@@ -4,7 +4,6 @@
 
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
-import Header from './component/header/page';
 
 
 
