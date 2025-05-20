@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function SeminarPage() {
   return (
@@ -27,10 +28,10 @@ export default function SeminarPage() {
           </p>
           <div className="row">
             <div className="col-md-6">
-              <img src="https://i.imgur.com/6AUTVdn.jpg" className="img-fluid rounded shadow" alt="Seminar 1" />
+              <Image src="https://i.imgur.com/6AUTVdn.jpg" alt="Seminar 1" width={600} height={400} className="img-fluid rounded shadow" style={{objectFit:'cover'}} />
             </div>
             <div className="col-md-6">
-              <img src="https://i.imgur.com/OCPhpZn.jpg" className="img-fluid rounded shadow" alt="Seminar 2" />
+              <Image src="https://i.imgur.com/OCPhpZn.jpg" alt="Seminar 2" width={600} height={400} className="img-fluid rounded shadow" style={{objectFit:'cover'}} />
             </div>
           </div>
         </div>
@@ -43,10 +44,10 @@ export default function SeminarPage() {
           </p>
           <div className="row gallery mt-3">
             <div className="col-md-6">
-              <img src="https://i.imgur.com/muLiw0v.jpg" className="img-fluid rounded shadow" alt="Seminar 3" />
+              <Image src="https://i.imgur.com/muLiw0v.jpg" alt="Seminar 3" width={600} height={400} className="img-fluid rounded shadow" style={{objectFit:'cover'}} />
             </div>
             <div className="col-md-6">
-              <img src="https://i.imgur.com/GdVDxDC.jpg" className="img-fluid rounded shadow" alt="Seminar 4" />
+              <Image src="https://i.imgur.com/GdVDxDC.jpg" alt="Seminar 4" width={600} height={400} className="img-fluid rounded shadow" style={{objectFit:'cover'}} />
             </div>
           </div>
         </div>

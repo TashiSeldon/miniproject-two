@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '../../../../context/AuthContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function TechTalkGallery() {
   const { user } = useAuth();
@@ -31,7 +32,7 @@ export default function TechTalkGallery() {
             </h2>
             <div className="card-text text-muted">
               <p className="lead">
-                The RUB ACM Student Chapter organized an informative session for first-year members titled 'Introduction to Online Competitive Programming Platform.'
+                The RUB ACM Student Chapter organized an informative session for first-year members titled &apos;Introduction to Online Competitive Programming Platform.&apos;
               </p>
               <p>
                 The session aimed to provide participants with essential tools and strategies...
@@ -75,10 +76,12 @@ export default function TechTalkGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/qZa9k5Q.jpg"
                       className="img-fluid"
                       alt="Tech Talk Session"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -104,10 +107,12 @@ export default function TechTalkGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/shM1qqt.jpg"
                       className="img-fluid"
                       alt="Guidance on Kattis"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -126,11 +131,11 @@ export default function TechTalkGallery() {
         <div className="card border-0 rounded-4 overflow-hidden shadow-lg mb-4">
           <div className="card-body p-4">
             <h2 className="card-title mb-4" style={{ color: '#1e3c72' }}>
-              Tech Talk Contest: "Let's Talk about Technology"
+              Tech Talk Contest: &quot;Let&apos;s Talk about Technology&quot;
             </h2>
             <div className="card-text text-muted mb-4">
               <p className="lead">
-                The most awaiting Tech-Talk Contest "Let's Talk about Technology" was finally held today (9/10/2022).
+                The most awaiting Tech-Talk Contest &quot;Let&apos;s Talk about Technology&quot; was finally held today (9/10/2022).
               </p>
               <div className="my-4">
                 <h5 className="mb-3" style={{ color: '#1e3c72' }}>Presentations:</h5>
@@ -165,10 +170,12 @@ export default function TechTalkGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/pVe2IO3.jpg"
                       className="img-fluid"
                       alt="Tech Talk Contest 1"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -194,10 +201,12 @@ export default function TechTalkGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/xtUOmGa.jpg"
                       className="img-fluid"
                       alt="Tech Talk Contest 2"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -260,17 +269,17 @@ export default function TechTalkGallery() {
                 ></button>
               </div>
               <div className="modal-body p-0">
-                <img
+                <Image
                   src={selectedImage.image}
                   alt={selectedImage.title}
+                  width={800}
+                  height={600}
                   className="w-100"
                   style={{ maxHeight: '70vh', objectFit: 'contain' }}
                 />
               </div>
               <div className="modal-footer border-0 bg-light">
-                <p className="mb-0 text-muted">
-                  {selectedImage.date || selectedImage.description}
-                </p>
+                <p className="mb-0 text-muted">{selectedImage.description}</p>
               </div>
             </div>
           </div>

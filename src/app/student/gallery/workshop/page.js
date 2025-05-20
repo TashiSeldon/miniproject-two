@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '../../../../context/AuthContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WorkshopGallery() {
   const { user } = useAuth();
@@ -26,7 +27,7 @@ export default function WorkshopGallery() {
         <div className="card border-0 rounded-4 overflow-hidden shadow-lg mb-4">
           <div className="card-body p-4">
             <h2 className="card-title mb-4" style={{ color: '#1e3c72' }}>
-              Monthly Program – September Session on Blockchain
+              Monthly Program &ndash; September Session on Blockchain
             </h2>
             <div className="card-text text-muted mb-4">
               <p className="lead">
@@ -85,10 +86,12 @@ export default function WorkshopGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/4XOYYYe.jpg"
                       className="img-fluid"
                       alt="Blockchain Session Image 1"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -114,10 +117,12 @@ export default function WorkshopGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src="https://imgur.com/R8S6mNW.jpg"
                       className="img-fluid"
                       alt="Blockchain Session Image 2"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
@@ -180,9 +185,11 @@ export default function WorkshopGallery() {
                 ></button>
               </div>
               <div className="modal-body p-0">
-                <img
+                <Image
                   src={selectedImage.image}
                   alt={selectedImage.title}
+                  width={800}
+                  height={600}
                   className="w-100"
                   style={{ maxHeight: '70vh', objectFit: 'contain' }}
                 />
