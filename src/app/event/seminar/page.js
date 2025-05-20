@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function ProgrammingClassGallery() {
+export default function SeminarPage() {
   return (
     <div className="bg-light min-vh-100">
       {/* Header Banner */}
@@ -14,23 +14,23 @@ export default function ProgrammingClassGallery() {
         }}
       >
         <div className="container">
-          <h1 className="text-white text-center mb-0">Programming Class</h1>
+          <h1 className="text-white text-center mb-0">Seminar</h1>
         </div>
       </div>
 
       <div className="container py-4">
-        {/* Programming Class Content */}
+        {/* Seminar Content */}
         <div className="news-content">
-          <h2>Introduction to Programming for First-Year Students</h2>
+          <h2>Seminar on Emerging Technologies</h2>
           <p>
-            On 19/08/2024, the RUB ACM Student Chapter commenced programming sessions for first-year students. The session introduced the fundamentals of programming and provided a basic introduction to the Python programming language. It was designed to assist new members in acquiring programming skills and gaining valuable learning experience as they begin their journey in the field of technology.
+            On 10/09/2024, the RUB ACM Student Chapter organized a seminar on emerging technologies. The seminar featured guest speakers from the tech industry who shared insights on the latest trends and innovations in technology. Students had the opportunity to learn about advancements in AI, cloud computing, and cybersecurity, and to engage in interactive discussions with the experts.
           </p>
           <div className="row">
             <div className="col-md-6">
-              <img src="https://i.imgur.com/ycJyaUp.jpg" className="img-fluid rounded shadow" alt="Programming Class 1" />
+              <img src="https://i.imgur.com/6AUTVdn.jpg" className="img-fluid rounded shadow" alt="Seminar 1" />
             </div>
             <div className="col-md-6">
-              <img src="https://i.imgur.com/z9er7wO.jpg" className="img-fluid rounded shadow" alt="Programming Class 2" />
+              <img src="https://i.imgur.com/OCPhpZn.jpg" className="img-fluid rounded shadow" alt="Seminar 2" />
             </div>
           </div>
         </div>
@@ -39,17 +39,14 @@ export default function ProgrammingClassGallery() {
 
         <div className="content mt-4">
           <p>
-            The usual weekly programming class for a semester has commenced since last Monday i.e. on 6th March, 2023 with introduction of Object Oriented Programming languages.
-          </p>
-          <p>
-            The programming class will be mentored by a group of final year IT students whereby on Monday, first years will be learning JAVA language and on Tuesday, second years will be learning Python language along with its implementation in AI field.
+            The seminar also included student research presentations and panel discussions on the impact of technology on society. The event fostered collaboration and knowledge sharing among students and professionals, and inspired participants to pursue further learning and innovation in the tech field.
           </p>
           <div className="row gallery mt-3">
             <div className="col-md-6">
-              <img src="https://i.imgur.com/w2Rqhd4.jpg" className="img-fluid rounded shadow" alt="Hackathon Poster" />
+              <img src="https://i.imgur.com/muLiw0v.jpg" className="img-fluid rounded shadow" alt="Seminar 3" />
             </div>
             <div className="col-md-6">
-              <img src="https://i.imgur.com/SKzfPTQ.jpg" className="img-fluid rounded shadow" alt="Hackathon Banner" />
+              <img src="https://i.imgur.com/GdVDxDC.jpg" className="img-fluid rounded shadow" alt="Seminar 4" />
             </div>
           </div>
         </div>
@@ -82,4 +79,4 @@ export default function ProgrammingClassGallery() {
       </div>
     </div>
   );
-}
+} 

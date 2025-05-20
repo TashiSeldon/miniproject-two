@@ -64,11 +64,11 @@ export default function StudentHomePage() {
   };
 
   const events = [
-    { name: 'Hackathon', image: 'https://imgur.com/RCbVBEl.jpg', link: '/student/gallery/hackathon', description: 'Intra-Collegiate Programming Contests showcasing student coding skills' },
-    { name: 'Tech Talk Series', image: 'https://imgur.com/pVe2IO3.jpg', link: '/student/gallery/techtalk', description: 'Industry experts shared insights on emerging technologies' },
-    { name: 'Workshop', image: 'https://imgur.com/G615WvY.jpg', link: '/student/gallery/workshop', description: 'An interactive session exploring the fundamentals, technologies, and practical applications of cryptocurrency and blockchain.' },
-    { name: 'Programming Class', image: 'https://imgur.com/ycJyaUp.jpg', link: '/student/gallery/programmingclass', description: 'Students competed in algorithmic problem-solving challenges' },
-    { name: 'Seminar', image: 'https://imgur.com/EG0JacW.jpg', link: '/student/gallery/seminar', description: 'A seminar focused on enhancing developer productivity through the latest tools and streamlined processes.' },
+    { name: 'Hackathon', image: 'https://i.imgur.com/RCbVBEl.jpg', link: '/student/gallery/hackathon', description: 'Intra-Collegiate Programming Contests showcasing student coding skills' },
+    { name: 'Tech Talk Series', image: 'https://i.imgur.com/pVe2IO3.jpg', link: '/student/gallery/techtalk', description: 'Industry experts shared insights on emerging technologies' },
+    { name: 'Workshop', image: 'https://i.imgur.com/G615WvY.jpg', link: '/student/gallery/workshop', description: 'An interactive session exploring the fundamentals, technologies, and practical applications of cryptocurrency and blockchain.' },
+    { name: 'Programming Class', image: 'https://i.imgur.com/ycJyaUp.jpg', link: '/student/gallery/programmingclass', description: 'Students competed in algorithmic problem-solving challenges' },
+    { name: 'Seminar', image: 'https://i.imgur.com/EG0JacW.jpg', link: '/student/gallery/seminar', description: 'A seminar focused on enhancing developer productivity through the latest tools and streamlined processes.' },
   ];
 
   function EventGrid() {
