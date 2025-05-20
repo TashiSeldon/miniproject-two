@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function SeminarGallery() {
   return (
@@ -25,7 +26,7 @@ export default function SeminarGallery() {
             </h2>
             <div className="card-text text-muted mb-4">
               <p>
-                The RUB ACM Student Chapter successfully conducted an insightful seminar titled "Empowering Developers: Tools and Process" on 07/09/2024. The seminar was delivered by our guest speaker, Khusant Chhetri, currently serving as the Head of Engineering Excellence at SELISE Bhutan.
+                The RUB ACM Student Chapter successfully conducted an insightful seminar titled &quot;Empowering Developers: Tools and Process&quot; on 07/09/2024. The seminar was delivered by our guest speaker, Khusant Chhetri, currently serving as the Head of Engineering Excellence at SELISE Bhutan.
               </p>
               <p>
                 Attended by IT students, ACM members, and faculty members from the IT department, the seminar explored the evolving and fast-paced nature of software and web development. It emphasized the importance of using the right tools and designing software in a scalable manner. The demo-oriented session discussed tools and technologies commonly employed in planning, developing, tracking, testing, deploying, and maintaining web applications, highlighting best practices throughout the process.
@@ -38,8 +39,8 @@ export default function SeminarGallery() {
             {/* Seminar Images */}
             <div className="row g-4">
               {[
-                "https://imgur.com/BlLIKpe.jpg",
-                "https://imgur.com/NyLK6Kj.jpg"
+                "https://i.imgur.com/BlLIKpe.jpg",
+                "https://i.imgur.com/NyLK6Kj.jpg"
               ].map((src, index) => (
                 <div key={index} className="col-md-6">
                   <div
@@ -57,10 +58,12 @@ export default function SeminarGallery() {
                       e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     }}
                   >
-                    <img
+                    <Image
                       src={src}
                       className="img-fluid"
                       alt="Seminar Talk"
+                      width={600}
+                      height={400}
                       style={{ height: '300px', width: '100%', objectFit: 'cover' }}
                     />
                   </div>
