@@ -7,33 +7,38 @@ const Footer = () => (
   >
     <div className="container text-center">
       <p className="mb-2">&copy; {new Date().getFullYear()} CST ACM Tech Hub. All rights reserved.</p>
-      <p className="mb-0">
-        Follow us on{' '}
+      <div className="social-links">
         <a
-          href="https://twitter.com"
+          href="https://www.facebook.com/rubacmchapter"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover-white mx-2"
-        >
-          <i className="fab fa-twitter"></i>
-        </a>
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover-white mx-2"
+          className="text-white mx-3"
+          style={{ 
+            fontSize: '1.5rem',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+          onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
           <i className="fab fa-facebook-f"></i>
         </a>
         <a
-          href="https://linkedin.com"
+          href="mailto:acmstudentchapter.cst@rub.edu.bt"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover-white mx-2"
+          className="text-white mx-3"
+          style={{ 
+            fontSize: '1.5rem',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
+          onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
-          <i className="fab fa-linkedin-in"></i>
+          <i className="fas fa-envelope"></i>
         </a>
-      </p>
+      </div>
     </div>
   </footer>
 );
