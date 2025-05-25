@@ -329,11 +329,11 @@ const AdminDashboard = () => {
   };
 
   const StatCard = ({ title, value }) => (
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-      <div className="flex items-center justify-between">
+    <div className="bg-white p-2 md:p-6 rounded-lg shadow-md border border-gray-200">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         <div>
-          <p className="text-gray-600 text-sm">{title}</p>
-          <p className="text-2xl font-bold mt-2 text-gray-800">{value}</p>
+          <p className="text-gray-600 text-xs md:text-sm">{title}</p>
+          <p className="text-lg md:text-2xl font-bold mt-2 text-gray-800">{value}</p>
         </div>
       </div>
     </div>
@@ -386,10 +386,12 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header Section with Dark Blue Background */}
         <div className="bg-blue-900 rounded-lg shadow-md p-6 mb-8">
-          <h1 className="text-3xl font-bold text-white mb-6">Admin Dashboard</h1>
+          <div className="p-2 md:p-6">
+            <h1 className="text-xl md:text-3xl text-white mb-6">Admin Dashboard</h1>
+          </div>
           
           {/* Navigation Tabs */}
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap space-x-0 md:space-x-4 space-y-2 md:space-y-0">
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-4 py-2 rounded-lg ${
@@ -430,15 +432,15 @@ const AdminDashboard = () => {
             >
               Upcoming Events
             </button>
-          <button
+            <button
               onClick={() => setActiveTab('news')}
               className={`px-4 py-2 rounded-lg ${
                 activeTab === 'news' ? 'bg-white text-blue-900' : 'bg-blue-800 text-white hover:bg-blue-700'
               }`}
             >
               Tech News
-          </button>
-        </div>
+            </button>
+          </div>
         </div>
 
         {/* Stats Grid */}

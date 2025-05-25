@@ -4,9 +4,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useAuth } from '../../../../context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const HackathonPage = () => {
   // Initialize Bootstrap
@@ -39,7 +39,7 @@ const HackathonPage = () => {
                   The 3rd Intra-Collegiate Programming Contest was successfully organized on November 1st in commemoration of the Coronation Day of His Majesty the Fifth King. The event was graced by the college president and IT department faculty, whose support was instrumental in making this event possible.
                 </p>
                 <p className="text-muted" style={{ lineHeight: '1.8' }}>
-                  This year&apos;s contest featured 13 teams, primarily from the IT department, with a few participants from other departments, who received special recognition for their participation. The event provided an exciting platform for students to showcase their coding skills in a competitive and collaborative environment, emphasizing the development of critical thinking and effective communication—skills essential for success in the tech industry.
+                  This year's contest featured 13 teams, primarily from the IT department, with a few participants from other departments, who received special recognition for their participation. The event provided an exciting platform for students to showcase their coding skills in a competitive and collaborative environment, emphasizing the development of critical thinking and effective communication—skills essential for success in the tech industry.
                 </p>
                 
                 <div className="card border-0 rounded-4 bg-light p-4 mb-4">
@@ -63,38 +63,17 @@ const HackathonPage = () => {
                 <div className="row g-4">
                   <div className="col-md-4">
                     <div className="card border-0 rounded-4 overflow-hidden shadow">
-                      <Image 
-                        src="https://i.imgur.com/RCbVBEl.jpg" 
-                        className="img-fluid" 
-                        alt="Coding Contest"
-                        width={400}
-                        height={300}
-                        style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
-                      />
+                      <img src="https://imgur.com/RCbVBEl.jpg" className="img-fluid" alt="Coding Contest" />
                     </div>
                   </div>
                   <div className="col-md-4">
                     <div className="card border-0 rounded-4 overflow-hidden shadow">
-                      <Image 
-                        src="https://i.imgur.com/c3XmaeB.jpg" 
-                        className="img-fluid" 
-                        alt="Award Ceremony"
-                        width={400}
-                        height={300}
-                        style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
-                      />
+                      <img src="https://imgur.com/c3XmaeB.jpg" className="img-fluid" alt="Award Ceremony" />
                     </div>
                   </div>
                   <div className="col-md-4">
                     <div className="card border-0 rounded-4 overflow-hidden shadow">
-                      <Image 
-                        src="https://i.imgur.com/yIGcX6H.jpg" 
-                        className="img-fluid" 
-                        alt="Group Photo"
-                        width={400}
-                        height={300}
-                        style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
-                      />
+                      <img src="https://imgur.com/yIGcX6H.jpg" className="img-fluid" alt="Group Photo" />
                     </div>
                   </div>
                 </div>
@@ -116,26 +95,12 @@ const HackathonPage = () => {
                 <div className="row g-4 mt-3">
                   <div className="col-md-6">
                     <div className="card border-0 rounded-4 overflow-hidden shadow">
-                      <Image 
-                        src="https://i.imgur.com/pHl1znH.jpg" 
-                        className="img-fluid" 
-                        alt="Hackathon Poster"
-                        width={600}
-                        height={400}
-                        style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
-                      />
+                      <img src="https://imgur.com/pHl1znH.jpg" className="img-fluid" alt="Hackathon Poster" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="card border-0 rounded-4 overflow-hidden shadow">
-                      <Image 
-                        src="https://i.imgur.com/1NZwX4r.jpg" 
-                        className="img-fluid" 
-                        alt="Hackathon Banner"
-                        width={600}
-                        height={400}
-                        style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
-                      />
+                      <img src="https://imgur.com/1NZwX4r.jpg" className="img-fluid" alt="Hackathon Banner" />
                     </div>
                   </div>
                 </div>

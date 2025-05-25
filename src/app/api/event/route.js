@@ -1,71 +1,84 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function POST(req) {
   try {
-    const data = await req.json();
-    console.log('Received registration data:', data);
+    const body = await req.json();
 
-    const { eventId, registrationType, name, collegeEmail, department, year, teamName, teamMembers } = data;
+    // Check if it's a team registration
+    if (body.members && Array.isArray(body.members)) {
+      const { eventId, teamName, members } = body;
 
-    if (!eventId || !registrationType) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      const team = await prisma.team.create({
+        data: {
+          teamName,
+          event: { connect: { id: eventId } },
+          members: {
+            create: members.map((member) => ({
+              name: member.name,
+              email: member.email,
+              studentNumber: member.studentNumber,
+              department: member.department,
+              year: member.year,
+              comment: member.comment || '',
+            })),
+          },
+        },
+      });
+
+      return NextResponse.json({ success: true, team });
     }
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    if (registrationType === 'individual') {
     // Individual registration
-      if (!name || !collegeEmail || !department || !year) {
-        return NextResponse.json({ error: 'Missing required fields for individual registration' }, { status: 400 });
-      }
-
-      const collection = db.collection('eventIndividualRegistrations');
-      const registration = {
+    const {
+      name,
+      email,
+      studentNumber,
+      department,
+      year,
+      comment,
       eventId,
+    } = body;
+
+    const registration = await prisma.individualRegistration.create({
+      data: {
         name,
-        collegeEmail,
+        email,
+        studentNumber,
         department,
         year,
-        status: 'pending',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
+        comment,
+        event: { connect: { id: eventId } },
+      },
+    });
 
-      const result = await collection.insertOne(registration);
-      console.log('Individual registration created:', result);
-
-      return NextResponse.json({
-        ...registration,
-        _id: result.insertedId
-      }, { status: 200 });
-    } else {
-      // Team registration
-      if (!teamName || !teamMembers || teamMembers.length === 0) {
-        return NextResponse.json({ error: 'Missing required fields for team registration' }, { status: 400 });
-      }
-
-      const collection = db.collection('eventTeamRegistrations');
-      const registration = {
-        eventId,
-        teamName,
-        teamMembers,
-        status: 'pending',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
-
-      const result = await collection.insertOne(registration);
-      console.log('Team registration created:', result);
-
-      return NextResponse.json({
-        ...registration,
-        _id: result.insertedId
-      }, { status: 200 });
-    }
+    return NextResponse.json({ success: true, registration });
   } catch (error) {
-    console.error('API Error:', error);
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    console.error('Registration error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to register' },
+      { status: 500 }
+    );
   }
 }
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  if (isTeam) {
+    setTeamData(prev => ({ ...prev, [name]: value }));
+  } else {
+    setIndividualData(prev => ({ ...prev, [name]: value }));
+  }
+
+  // Reset isTeam if event changes to a non-team event
+  if (name === 'eventId') {
+    const teamEvents = ['eventTwo', 'eventFour'];
+    if (!teamEvents.includes(value)) {
+      setIsTeam(false);
+      setTeamMembers([{ name: '', email: '', studentNumber: '', department: '', year: '', comment: '' }]);
+    }
+  }
+};
